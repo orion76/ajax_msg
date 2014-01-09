@@ -12,10 +12,10 @@ define('AJAX_MSG_CURRENT_ALERTYFY_THEME', 'my');
  */
 function ajax_msg_preprocess_page(&$vars) {
 
-  drupal_set_message('Test 1');
-  drupal_set_message('Test status', 'status');
-  drupal_set_message('Test warning', 'warning');
-  drupal_set_message('Test error', 'error');
+//  drupal_set_message('Test 1');
+//  drupal_set_message('Test status', 'status');
+//  drupal_set_message('Test warning', 'warning');
+//  drupal_set_message('Test error', 'error');
 
 ajax_msg_send();
  
