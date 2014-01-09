@@ -1,0 +1,11 @@
+name = Ajax Drupal messages
+description = ""
+package = gpb
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-01-25
+version = "7.x-0.1"
+core = "7.x"
+project = "dia-calc"
+datestamp = "1359135111"
+

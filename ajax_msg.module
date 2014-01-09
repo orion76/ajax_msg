@@ -1,0 +1,81 @@
+<?php
+
+define('AJAX_MSG_CURRENT_ALERTYFY_JS', 'alertify.min');
+define('AJAX_MSG_CURRENT_ALERTYFY_THEME', 'my');
+//define('AJAX_MSG_CURRENT_ALERTYFY','alertify.min.js');
+
+/**
+ *  *   - NULL
+ *   - 'status'
+ *   - 'warning'
+ *   - 'error'
+ */
+function ajax_msg_preprocess_page(&$vars) {
+/*
+  drupal_set_message('Test 1');
+  drupal_set_message('Test status', 'status');
+  drupal_set_message('Test warning', 'warning');
+  drupal_set_message('Test error', 'error');
+*/
+ajax_msg_send();
+ 
+}
+
+/**
+ *  
+ *
+ * @param 
+ *  
+ * @return 
+ *  
+ */
+function ajax_msg_send(){
+	 drupal_add_library('ajax_msg', 'ajax_msg');
+  $messages = drupal_get_messages(FALSE, TRUE);
+
+  $settings = array();
+  $delay=5000;
+  foreach ($messages as $type => $items) {
+    foreach ($items as $item) {
+      $settings[] = array(
+          'type' => $type,
+          'message'=>$item,
+          'delay' => $delay
+      );
+      $delay+=3000;
+    }
+  }
+  drupal_add_js(array('ajax_msg' => $settings), 'setting');
+}
+/**
+ *  
+ *
+ * @param 
+ *  
+ * @return 
+ *  
+ */
+function ajax_msg_library() {
+  // Library One.
+  $path = drupal_get_path('module', 'ajax_msg');
+  $libraries['ajax_msg'] = array(
+      'title' => 'Ajax Drupal message',
+      'website' => 'http://example.com/library-1',
+      'version' => '1.2',
+      'js' => array(
+          $path . '/js/ajax_msg.js'=>array(),
+          $path . '/js/' . AJAX_MSG_CURRENT_ALERTYFY_JS . '.js'=>array(),
+      ),
+      'css' => array(
+          $path . '/css/alertify.my_core.css' => array(
+              'type' => 'file',
+              'media' => 'screen',
+          ),
+          $path . '/css/alertify.' . AJAX_MSG_CURRENT_ALERTYFY_THEME . '.css' => array(
+              'type' => 'file',
+              'media' => 'screen',
+          ),
+      ),
+  );
+  return $libraries;
+}
